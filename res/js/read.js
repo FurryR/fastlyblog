@@ -26,7 +26,10 @@ function WebLocation(str) {
     });
   if (str.indexOf("#") != -1) this.location = str.substr(str.indexOf("#") + 1);
 }
-
+var doc_title;
+var doc_artist;
+var doc_date;
+var doc_id;
 function read_init() {
   var process = new WebLocation(window.location.href);
   content = document.getElementById("content");
@@ -73,6 +76,8 @@ function clearContent() {
   document.getElementById("content").innerHTML = "";
 }
 function $info(author, date) {
+  doc_artist=author;
+  doc_date=date;
   var content = document.getElementById("content");
   var tnode = document.createElement("p");
   tnode.innerText =
@@ -84,8 +89,10 @@ function $info(author, date) {
   tnode.id = "content_info";
   tnode.style.color = "silver";
   content.appendChild(tnode);
+  console.log([parseInt((new WebLocation(window.location.href)).query["id"]),doc_title,doc_date,doc_artist]);
 }
 function $title(title) {
+  doc_title=title;
   var content = document.getElementById("content");
   var tnode = document.createElement("h1");
   tnode.innerText = title;
