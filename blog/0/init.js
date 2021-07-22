@@ -85,7 +85,7 @@ function getBlogContent(data = []) {
       aele.href = `/read.html?id=${info[0]}`;
       aele.className = "link";
       var pele = document.createElement("p");
-      pele.className = "blog_title";
+      pele.className = "blog_title overflow_nowrap";
       pele.innerText = info[1][0];
       aele.appendChild(pele);
       temp.appendChild(aele);
