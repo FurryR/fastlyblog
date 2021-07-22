@@ -62,36 +62,41 @@ function getBlogContent(data = []) {
     return;
   }
   node.removeChild(document.getElementById("waiting_text"));
-  data.reverse();
-  data.forEach((info) => {
-    /*
-    info[0] = id(${window.location.origin}/read.html?id=xxx)
-    info[1] = title
-    info[2] = date(TimeStamp)
-    info[3] = author
-    */
-    var temp = document.createElement("div");
-    temp.onclick = function () {
-      window.location.href = `/read.html?id=${info[0]}`;
-    };
-    temp.className = "blog_select_box";
-    temp.title = "阅读这篇博客";
-    var aele = document.createElement("a");
-    aele.href = `/read.html?id=${info[0]}`;
-    aele.className = "link";
-    var pele = document.createElement("p");
-    pele.className = "blog_title";
-    pele.innerText = info[1];
-    aele.appendChild(pele);
-    temp.appendChild(aele);
-    var date = document.createElement("span");
-    date.className = "blog_date";
-    date.innerText =
-      info[3] +
-      ` 作于 ${new Date(info[2]).toLocaleString()}(UTC+${
-        0 - new Date().getTimezoneOffset() / 60
-      })`;
-    temp.appendChild(date);
-    node.appendChild(temp);
-  });
+  Object.entries(data)
+    .sort((a, b) => {
+      if (a[1][2] > b[1][2]) return -1;
+      if (a[1][2] < b[1][2]) return 1;
+      return 0;
+    })
+    .forEach((info) => {
+      /*
+      info[0] = id(${window.location.origin}/read.html?id=xxx)
+      info[1][0] = title
+      info[1][1] = date(TimeStamp)
+      info[1][2] = author
+      */
+      var temp = document.createElement("div");
+      temp.onclick = function () {
+        window.location.href = `/read.html?id=${info[0]}`;
+      };
+      temp.className = "blog_select_box";
+      temp.title = "阅读这篇博客";
+      var aele = document.createElement("a");
+      aele.href = `/read.html?id=${info[0]}`;
+      aele.className = "link";
+      var pele = document.createElement("p");
+      pele.className = "blog_title";
+      pele.innerText = info[1][0];
+      aele.appendChild(pele);
+      temp.appendChild(aele);
+      var date = document.createElement("span");
+      date.className = "blog_date";
+      date.innerText =
+        info[1][2] +
+        ` 作于 ${new Date(info[1][1]).toLocaleString()}(UTC+${
+          0 - new Date().getTimezoneOffset() / 60
+        })`;
+      temp.appendChild(date);
+      node.appendChild(temp);
+    });
 }

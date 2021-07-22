@@ -90,12 +90,11 @@ function $info(author, date) {
   tnode.style.color = "silver";
   content.appendChild(tnode);
   console.log(
-    JSON.stringify([
-      parseInt(new WebLocation(window.location.href).query["id"]),
-      doc_title,
-      doc_date,
-      doc_artist,
-    ])
+    `${parseInt(
+      new WebLocation(window.location.href).query["id"]
+    )}:[${JSON.stringify(doc_title)},${doc_date},${JSON.stringify(
+      doc_artist
+    )}],`
   );
 }
 function $title(title) {
