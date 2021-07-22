@@ -76,8 +76,8 @@ function clearContent() {
   document.getElementById("content").innerHTML = "";
 }
 function $info(author, date) {
-  doc_artist=author;
-  doc_date=date;
+  doc_artist = author;
+  doc_date = date;
   var content = document.getElementById("content");
   var tnode = document.createElement("p");
   tnode.innerText =
@@ -89,10 +89,17 @@ function $info(author, date) {
   tnode.id = "content_info";
   tnode.style.color = "silver";
   content.appendChild(tnode);
-  console.log([parseInt((new WebLocation(window.location.href)).query["id"]),doc_title,doc_date,doc_artist]);
+  console.log(
+    JSON.stringify([
+      parseInt(new WebLocation(window.location.href).query["id"]),
+      doc_title,
+      doc_date,
+      doc_artist,
+    ])
+  );
 }
 function $title(title) {
-  doc_title=title;
+  doc_title = title;
   var content = document.getElementById("content");
   var tnode = document.createElement("h1");
   tnode.innerText = title;

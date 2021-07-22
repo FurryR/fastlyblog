@@ -1,4 +1,5 @@
 const blog_author = "你"; //replace it with your name!
+var title_backup;
 function init() {
   //constant values
   const header_html = `
@@ -21,5 +22,12 @@ function init() {
   init_footer.innerHTML = footer_html;
   header.appendChild(init_header);
   footer.appendChild(init_footer);
+  document.body.onblur = () => {
+    title_backup = document.title;
+    document.title = `${blog_author}的个人站点 - 待机中`;
+  };
+  document.body.onfocus = () => {
+    document.title = title_backup;
+  };
   //console.log("[Info]Sync init finished");
 }
