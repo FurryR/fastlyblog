@@ -64,8 +64,8 @@ function getBlogContent(data = []) {
   node.removeChild(document.getElementById("waiting_text"));
   Object.entries(data)
     .sort((a, b) => {
-      if (a[1][2] > b[1][2]) return -1;
-      if (a[1][2] < b[1][2]) return 1;
+      if (a[1][1] > b[1][1]) return -1;
+      if (a[1][1] < b[1][1]) return 1;
       return 0;
     })
     .forEach((info) => {
